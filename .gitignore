@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+build/
+log/
+*.pyc
+*.o
+*.so
