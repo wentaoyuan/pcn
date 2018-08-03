@@ -4,6 +4,17 @@
 ### Introduction
 PCN is a learning-based shape completion method which directly maps a partial point cloud to a dense, complete point cloud without any voxelization. It is based on our 3DV 2018 publication [PCN: Point Completion Network](https://arxiv.org/pdf/). Please refer to our [project website](https://cs.cmu.edu/~wyuan1/pcn) or read our paper for more details.
 
+### Citation
+If you find our work useful for your research, please cite:
+```
+@article{yuan2018pcn,
+  title     = {PCN: Point Completion Network},
+  author    = {Yuan, Wentao and Khot, Tejas and Held, David and Mertz, Christoph and Hebert, Martial},
+  journal   = {arXiv preprint arXiv:1808.00671},
+  year      = {2018}
+}
+```
+
 ### Usage
 #### 1) Prerequisite
 1. Install dependencies via `pip3 install -r requirments.txt`.
