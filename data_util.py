@@ -25,12 +25,11 @@ class PreprocessData(dataflow.ProxyDataFlow):
 
 
 def lmdb_dataflow(lmdb_path, batch_size, input_size, output_size, is_training, test_speed=False):
-    df = dataflow.LMDBData(lmdb_path, shuffle=False)
+    df = dataflow.LMDBSerializer.load(lmdb_path, shuffle=False)
     size = df.size()
     if is_training:
         df = dataflow.LocallyShuffleData(df, buffer_size=2000)
     df = dataflow.PrefetchData(df, nr_prefetch=500, nr_proc=1)
-    df = dataflow.LMDBDataPoint(df)
     df = PreprocessData(df, input_size, output_size)
     if is_training:
         df = dataflow.PrefetchDataZMQ(df, nr_proc=8)
