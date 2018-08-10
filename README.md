@@ -44,7 +44,7 @@ Run `python3 demo.py`. Use `--input_path` option to switch between the input exa
 2. Run `python3 train.py`. Type `python3 train.py -h` for more options.
 
 #### 7) Data Generation
-To generate your own data from ShapeNet or KITTI. Refer to `README.md` in `render`, `sample` and `kitti_util`.
+To generate your own data from ShapeNet, first Download [ShapeNetCore.v1](https://shapenet.org). Then, create partial point clouds from depth images (see instructions in `render`) and corresponding ground truths by sampling from CAD models (see instructions in `sample`). Finally, serialize the data using `lmdb_writer.py`.
 
 ### License
 This project Code is released under the MIT License (refer to the LICENSE file for details).
