@@ -33,7 +33,7 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  *
- * Modified by Wentao Yuan.
+ * Modified by Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
  */
 
 #include <pcl/visualization/pcl_visualizer.h>

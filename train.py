@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
+
 import argparse
 import datetime
 import importlib
@@ -75,7 +77,7 @@ def train(args):
         with open(os.path.join(args.log_dir, 'args.txt'), 'w') as log:
             for arg in sorted(vars(args)):
                 log.write(arg + ': ' + str(getattr(args, arg)) + '\n')     # log of arguments
-        os.system('cp models/%s.py %s' % (args.model_type, args.log_dir))   # bkp of model def
+        os.system('cp models/%s.py %s' % (args.model_type, args.log_dir))  # bkp of model def
         os.system('cp train.py %s' % args.log_dir)                         # bkp of train procedure
 
     train_summary = tf.summary.merge_all('train_summary')

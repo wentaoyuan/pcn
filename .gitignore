@@ -1,4 +1,4 @@
-.idea/
+.vscode/
 __pycache__/
 build/
 log/

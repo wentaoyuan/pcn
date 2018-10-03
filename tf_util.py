@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
+
 import tensorflow as tf
 from pc_distance import tf_nndistance, tf_approxmatch
 

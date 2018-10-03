@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
+
 import numpy as np
 import tensorflow as tf
 from tensorpack import dataflow

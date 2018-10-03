@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
+
 import argparse
 import os
 from io_util import read_pcd

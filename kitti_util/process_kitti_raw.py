@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 07/31/2018
+
 import argparse
 import numpy as np
 import os

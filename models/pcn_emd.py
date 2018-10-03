@@ -1,3 +1,5 @@
+# Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
+
 import tensorflow as tf
 from tf_util import mlp, mlp_conv, chamfer, earth_mover, add_train_summary, add_valid_summary
 
