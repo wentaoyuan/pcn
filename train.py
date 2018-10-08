@@ -49,7 +49,7 @@ def train(args):
                                                    args.lr_decay_steps, args.lr_decay_rate,
                                                    staircase=True, name='lr')
         learning_rate = tf.maximum(learning_rate, args.lr_clip)
-        model.add_train_summary('learning_rate', learning_rate)
+        add_train_summary('learning_rate', learning_rate)
     else:
         learning_rate = tf.constant(args.base_lr, name='lr')
 
