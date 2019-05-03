@@ -1,7 +1,8 @@
-.vscode/
-__pycache__/
-build/
-log/
+__pycache__
+.vscode
+build
+log
+results
 *.pyc
 *.o
 *.so
