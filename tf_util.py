@@ -34,6 +34,18 @@ def mlp_conv(inputs, layer_dims, bn=None, bn_params=None):
     return outputs
 
 
+def point_maxpool(inputs, npts, keepdims=False):
+    outputs = [tf.reduce_max(f, axis=1, keepdims=keepdims)
+        for f in tf.split(inputs, npts, axis=1)]
+    return tf.concat(outputs, axis=0)
+
+
+def point_unpool(inputs, npts):
+    inputs = tf.split(inputs, inputs.shape[0], axis=0)
+    outputs = [tf.tile(f, [1, npts[i], 1]) for i,f in enumerate(inputs)]
+    return tf.concat(outputs, axis=1)
+
+
 def chamfer(pcd1, pcd2):
     dist1, _, dist2, _ = tf_nndistance.nn_distance(pcd1, pcd2)
     dist1 = tf.reduce_mean(tf.sqrt(dist1))

@@ -13,9 +13,10 @@ from visu_util import plot_pcd_three_views
 
 def test(args):
     inputs = tf.placeholder(tf.float32, (1, None, 3))
+    npts = tf.placeholder(tf.int32, (1,))
     gt = tf.placeholder(tf.float32, (1, args.num_gt_points, 3))
     model_module = importlib.import_module('.%s' % args.model_type, 'models')
-    model = model_module.Model(inputs, gt, tf.constant(1.0))
+    model = model_module.Model(inputs, npts, gt, tf.constant(1.0))
 
     os.makedirs(os.path.join(args.results_dir, 'plots'), exist_ok=True)
     os.makedirs(os.path.join(args.results_dir, 'completions'), exist_ok=True)
@@ -51,7 +52,7 @@ def test(args):
         partial = np.dot(partial, [[1, 0, 0], [0, 0, 1], [0, 1, 0]])
 
         start = time.time()
-        completion = sess.run(model.outputs, feed_dict={inputs: [partial]})
+        completion = sess.run(model.outputs, feed_dict={inputs: [partial], npts: [partial.shape[0]]})
         total_time += time.time() - start
         completion = completion[0]
 
@@ -75,7 +76,7 @@ if __name__ == '__main__':
     parser.add_argument('--checkpoint', default='data/trained_models/pcn_emd_car')
     parser.add_argument('--pcd_dir', default='data/kitti/cars')
     parser.add_argument('--bbox_dir', default='data/kitti/bboxes')
-    parser.add_argument('--results_dir', default='data/results/kitti_pcn_emd')
+    parser.add_argument('--results_dir', default='results/kitti_pcn_emd')
     parser.add_argument('--num_gt_points', type=int, default=16384)
     parser.add_argument('--plot_freq', type=int, default=100)
     parser.add_argument('--save_pcd', action='store_true')

@@ -15,9 +15,10 @@ from visu_util import plot_pcd_three_views
 
 def test(args):
     inputs = tf.placeholder(tf.float32, (1, None, 3))
+    npts = tf.placeholder(tf.int32, (1,))
     gt = tf.placeholder(tf.float32, (1, args.num_gt_points, 3))
     model_module = importlib.import_module('.%s' % args.model_type, 'models')
-    model = model_module.Model(inputs, gt, tf.constant(1.0))
+    model = model_module.Model(inputs, npts, gt, tf.constant(1.0))
 
     output = tf.placeholder(tf.float32, (1, args.num_gt_points, 3))
     cd_op = chamfer(output, gt)
@@ -47,7 +48,7 @@ def test(args):
         partial = read_pcd(os.path.join(args.data_dir, 'partial', '%s.pcd' % model_id))
         complete = read_pcd(os.path.join(args.data_dir, 'complete', '%s.pcd' % model_id))
         start = time.time()
-        completion = sess.run(model.outputs, feed_dict={inputs: [partial]})
+        completion = sess.run(model.outputs, feed_dict={inputs: [partial], npts: [partial.shape[0]]})
         total_time += time.time() - start
         cd, emd = sess.run([cd_op, emd_op], feed_dict={output: completion, gt: [complete]})
         total_cd += cd
@@ -90,9 +91,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--list_path', default='data/shapenet/test.list')
     parser.add_argument('--data_dir', default='data/shapenet/test')
-    parser.add_argument('--model_type', default='pcn_cd')
-    parser.add_argument('--checkpoint', default='data/trained_models/pcn_cd')
-    parser.add_argument('--results_dir', default='data/shapenet_test_pcn_cd')
+    parser.add_argument('--model_type', default='pcn_emd')
+    parser.add_argument('--checkpoint', default='data/trained_models/pcn_emd')
+    parser.add_argument('--results_dir', default='results/shapenet_pcn_emd')
     parser.add_argument('--num_gt_points', type=int, default=16384)
     parser.add_argument('--plot_freq', type=int, default=100)
     parser.add_argument('--save_pcd', action='store_true')

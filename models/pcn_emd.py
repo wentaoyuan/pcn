@@ -1,30 +1,30 @@
 # Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
 
 import tensorflow as tf
-from tf_util import mlp, mlp_conv, chamfer, earth_mover, add_train_summary, add_valid_summary
+from tf_util import *
 
 
 class Model:
-    def __init__(self, inputs, gt, alpha):
+    def __init__(self, inputs, npts, gt, alpha):
         self.num_coarse = 1024
         self.grid_size = 4
         self.grid_scale = 0.05
         self.num_fine = self.grid_size ** 2 * self.num_coarse
-        self.features = self.create_encoder(inputs)
+        self.features = self.create_encoder(inputs, npts)
         self.coarse, self.fine = self.create_decoder(self.features)
         self.loss, self.update = self.create_loss(self.coarse, self.fine, gt, alpha)
         self.outputs = self.fine
-        self.visualize_ops = [inputs[0], self.coarse[0], self.fine[0], gt[0]]
+        self.visualize_ops = [tf.split(inputs[0], npts, axis=0), self.coarse, self.fine, gt]
         self.visualize_titles = ['input', 'coarse output', 'fine output', 'ground truth']
 
-    def create_encoder(self, inputs):
+    def create_encoder(self, inputs, npts):
         with tf.variable_scope('encoder_0', reuse=tf.AUTO_REUSE):
             features = mlp_conv(inputs, [128, 256])
-            features_global = tf.reduce_max(features, axis=1, keep_dims=True, name='maxpool_0')
-            features = tf.concat([features, tf.tile(features_global, [1, tf.shape(inputs)[1], 1])], axis=2)
+            features_global = point_unpool(point_maxpool(features, npts, keepdims=True), npts)
+            features = tf.concat([features, features_global], axis=2)
         with tf.variable_scope('encoder_1', reuse=tf.AUTO_REUSE):
             features = mlp_conv(features, [512, 1024])
-            features = tf.reduce_max(features, axis=1, name='maxpool_1')
+            features = point_maxpool(features, npts)
         return features
 
     def create_decoder(self, features):
