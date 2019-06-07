@@ -28,8 +28,9 @@ if __name__ == '__main__':
 
     inputs = tf.placeholder(tf.float32, (1, None, 3))
     gt = tf.placeholder(tf.float32, (1, args.num_gt_points, 3))
+    npts = tf.placeholder(tf.int32, (1,))
     model_module = importlib.import_module('.%s' % args.model_type, 'models')
-    model = model_module.Model(inputs, gt, tf.constant(1.0))
+    model = model_module.Model(inputs, npts, gt, tf.constant(1.0))
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
@@ -41,7 +42,7 @@ if __name__ == '__main__':
 
     partial = read_point_cloud(args.input_path)
     partial = np.array(partial.points)
-    complete = sess.run(model.outputs, feed_dict={inputs: [partial]})[0]
+    complete = sess.run(model.outputs, feed_dict={inputs: [partial], npts: [partial.shape[0]]})[0]
 
     fig = plt.figure(figsize=(8, 4))
     ax = fig.add_subplot(121, projection='3d')
