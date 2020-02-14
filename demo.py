@@ -5,9 +5,10 @@ import importlib
 import models
 import numpy as np
 import tensorflow as tf
+
+from io_util import read_pcd, save_pcd
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from open3d import *
 
 
 def plot_pcd(ax, pcd):
@@ -40,8 +41,7 @@ if __name__ == '__main__':
     saver = tf.train.Saver()
     saver.restore(sess, args.checkpoint)
 
-    partial = read_point_cloud(args.input_path)
-    partial = np.array(partial.points)
+    partial = read_pcd(args.input_path)
     complete = sess.run(model.outputs, feed_dict={inputs: [partial], npts: [partial.shape[0]]})[0]
 
     fig = plt.figure(figsize=(8, 4))
