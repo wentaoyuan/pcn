@@ -12,4 +12,4 @@ def read_pcd(filename):
 def save_pcd(filename, points):
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(points)
-    write_point_cloud(filename, pcd)
+    o3d.io.write_point_cloud(filename, pcd)
