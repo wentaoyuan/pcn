@@ -1,5 +1,7 @@
 # Author: Wentao Yuan (wyuan1@cs.cmu.edu) 05/31/2018
 
+import open3d as o3d
+
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -26,3 +28,9 @@ def plot_pcd_three_views(filename, pcds, titles, suptitle='', sizes=None, cmap='
     plt.suptitle(suptitle)
     fig.savefig(filename)
     plt.close(fig)
+
+
+def show_pcd(points):
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(points)
+    o3d.visualization.draw_geometries([pcd])
