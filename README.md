@@ -1,8 +1,8 @@
 ## PCN: Point Completion Network
-#### [[paper]](https://arxiv.org/pdf/1808.00671.pdf) [[data]](https://drive.google.com/open?id=1M_lJN14Ac1RtPtEQxNlCV9e8pom3U6Pa) [[website]](https://cs.cmu.edu/~wyuan1/pcn)
+#### [[paper]](https://arxiv.org/pdf/1808.00671.pdf) [[data]](https://drive.google.com/open?id=1M_lJN14Ac1RtPtEQxNlCV9e8pom3U6Pa) [[website]](https://wentaoyuan.github.io/pcn)
 
 ### Introduction
-PCN is a learning-based shape completion method which directly maps a partial point cloud to a dense, complete point cloud without any voxelization. It is based on our 3DV 2018 publication [PCN: Point Completion Network](https://arxiv.org/abs/1808.00671/). Please refer to our [project website](https://cs.cmu.edu/~wyuan1/pcn) or read our paper for more details.
+PCN is a learning-based shape completion method which directly maps a partial point cloud to a dense, complete point cloud without any voxelization. It is based on our 3DV 2018 publication [PCN: Point Completion Network](https://arxiv.org/abs/1808.00671). Please refer to our [project website](https://wentaoyuan.github.io/pcn) or read our paper for more details.
 
 ### Citation
 If you find our work useful for your research, please cite:

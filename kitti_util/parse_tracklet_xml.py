@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 parse XML files containing tracklet info for kitti data base (raw data section)
 (http://cvlibs.net/datasets/kitti/raw_data.php)
